@@ -1,1 +1,5 @@
-*.pyc
+*.py[cod]
+dist
+build
+__pycache__
+pip-log.txt
