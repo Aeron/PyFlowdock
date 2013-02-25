@@ -1,5 +1,5 @@
 # PyFlowdock
-Simple [Flowdock APIs](https://flowdock.com/api) wrapper with some useful helpers. Only [Push API](https://flowdock.com/api/push) (**Team Inbox** and **Chat**) available at this time.
+Simple [Flowdock APIs](https://flowdock.com/api) wrapper with some useful helpers. Only [Push API](https://flowdock.com/api/push) (Team Inbox and Chat) available at this time.
 ## Installation
 You know how to do it… Right? Just `(sudo) pip install pyflowdock` (not in PyPI at this moment) it or use `(sudo) python setup.py install` inside **pyflowdock** folder.
 
@@ -11,7 +11,7 @@ Simple as a pie…
 
 ```python
 from flowdock import TeamInbox
-inbox = TeamInbox(<your_flow_api_token>)
+inbox = TeamInbox('your_flow_api_token')
 # With all params
 inbox.post('Source', 'from_address@example.com', 'Subject', '<p>Content.</p>', 'From Name', 'reply_to@example.com', 'Project', 'format', ['tags', '@tags', '#tags'], 'http://link.example.com')
 # With required params only
@@ -37,7 +37,7 @@ inbox.post('Source', 'from_address@example.com', 'Subject', '<p>Content.</p>')
 #### Chat
 ```python
 from flowdock import Chat
-chat = Chat(<your_flow_api_token>)
+chat = Chat('your_flow_api_token')
 # With all params
 chat.post('Content', 'External User Name', ['tags', '@tags', '#tags'])
 # With required params only
@@ -58,8 +58,9 @@ chat.post('Content', 'External User Name')
 import logging
 from flowdock.helpers import FlowdockTeamInboxLoggingHandler
 # With all params
-handler = FlowdockTeamInboxLoggingHandler(<your_flow_api_token>, 'Source', 'from_address@example.com', 'From Name')
-# With required params
-handler = FlowdockTeamInboxLoggingHandler(<your_flow_api_token>)
-logging.getLogger('your_logger').setLevel(logging.DEBUG).addHandler(handler)
+handler = FlowdockTeamInboxLoggingHandler('your_flow_api_token', 'Source', 'from_address@example.com', 'From Name')
+# With required params only
+handler = FlowdockTeamInboxLoggingHandler('your_flow_api_token')
+logger = logging.getLogger('your_logger').setLevel(logging.DEBUG).addHandler(handler)
+logger.debug('Content')
 ```
