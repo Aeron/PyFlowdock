@@ -9,7 +9,7 @@ Simple as a pie…
 ### Push API
 #### Team Inbox
 
-```
+```python
 from flowdock import TeamInbox
 inbox = TeamInbox(<your_flow_api_token>)
 # With all params
@@ -35,7 +35,7 @@ inbox.post('Source', 'from_address@example.com', 'Subject', '<p>Content.</p>')
 
 
 #### Chat
-```
+```python
 from flowdock import Chat
 chat = Chat(<your_flow_api_token>)
 # With all params
@@ -54,7 +54,7 @@ chat.post('Content', 'External User Name')
 
 ### Helpers
 #### Logging
-```
+```python
 import logging
 from flowdock.helpers import FlowDockTeamInboxLoggingHandler
 # With all params
