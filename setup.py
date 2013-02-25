@@ -18,7 +18,7 @@ setup(
 	},
 	author=u"Eugene “Aeron” Glybin",
 	author_email="aeron@aeron.cc",
-	description="Python wrapper for FlowDock APIs",
+	description="Python wrapper for Flowdock APIs",
 	license="LGPLv3",
 	keywords="flowdock api wrapper",
 	classifiers=[

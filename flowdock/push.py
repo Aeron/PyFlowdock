@@ -1,7 +1,7 @@
 # coding: utf-8
 import requests
 from re import match, IGNORECASE
-from .exceptions import FlowDockException
+from .exceptions import FlowdockException
 
 PUSH_TEAM_INBOX_API_URL = "https://api.flowdock.com/v1/messages/team_inbox/%s"
 PUSH_CHAT_API_URL = "https://api.flowdock.com/v1/messages/chat/%s"
@@ -24,9 +24,9 @@ class PushAPI(object):
 		data = dict((k, v) for k, v in data.iteritems() if k != 'self' and v is not None)
 		response = requests.post(self.api_url, data=data)
 		if response.status_code == 500:
-			raise FlowDockException(response.content)
+			raise FlowdockException(response.content)
 		elif response.status_code // 100 == 4:  # all 4xx HTTP errors
-			raise FlowDockException(response.json)
+			raise FlowdockException(response.json)
 		elif response.status_code == 200:
 			return True
 		response.raise_for_status()

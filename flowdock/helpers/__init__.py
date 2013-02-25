@@ -1,6 +1,6 @@
 # coding: utf-8
-from .log import FlowDockTeamInboxLoggingHandler
+from .log import FlowdockTeamInboxLoggingHandler
 
 __all__ = [
-	'FlowDockTeamInboxLoggingHandler',
+	'FlowdockTeamInboxLoggingHandler',
 ]

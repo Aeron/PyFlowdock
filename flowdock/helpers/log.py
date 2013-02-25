@@ -4,9 +4,9 @@ from logging import Handler, DEBUG
 from ..push import TeamInbox
 
 
-class FlowDockTeamInboxLoggingHandler(Handler):
-	def __init__(self, flow_api_token, source="PyFlowDock Logging Helper", from_address='no-reply@example.com', from_name='Logger'):
-		super(FlowDockTeamInboxLoggingHandler, self).__init__()
+class FlowdockTeamInboxLoggingHandler(Handler):
+	def __init__(self, flow_api_token, source="PyFlowdock Logging Helper", from_address='no-reply@example.com', from_name='Logger'):
+		super(FlowdockTeamInboxLoggingHandler, self).__init__()
 		self.level = DEBUG
 		self.api = TeamInbox(flow_api_token)
 		self.source = source
@@ -20,4 +20,4 @@ class FlowDockTeamInboxLoggingHandler(Handler):
 
 	def format(self, record):
 		record.msg = "<p>%s</p>" % record.getMessage()
-		return super(FlowDockTeamInboxLoggingHandler, self).format(record)
+		return super(FlowdockTeamInboxLoggingHandler, self).format(record)

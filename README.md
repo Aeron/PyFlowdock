@@ -1,5 +1,5 @@
-# PyFlowDock
-Simple [FlowDock APIs](https://flowdock.com/api) wrapper with some useful helpers. Only [Push API](https://flowdock.com/api/push) (**Team Inbox** and **Chat**) available at this time.
+# PyFlowdock
+Simple [Flowdock APIs](https://flowdock.com/api) wrapper with some useful helpers. Only [Push API](https://flowdock.com/api/push) (**Team Inbox** and **Chat**) available at this time.
 ## Installation
 You know how to do it… Right? Just `(sudo) pip install pyflowdock` (not in PyPI at this moment) it or use `(sudo) python setup.py install` inside **pyflowdock** folder.
 
@@ -56,10 +56,10 @@ chat.post('Content', 'External User Name')
 #### Logging
 ```python
 import logging
-from flowdock.helpers import FlowDockTeamInboxLoggingHandler
+from flowdock.helpers import FlowdockTeamInboxLoggingHandler
 # With all params
-handler = FlowDockTeamInboxLoggingHandler(<your_flow_api_token>, 'Source', 'from_address@example.com', 'From Name')
+handler = FlowdockTeamInboxLoggingHandler(<your_flow_api_token>, 'Source', 'from_address@example.com', 'From Name')
 # With required params
-handler = FlowDockTeamInboxLoggingHandler(<your_flow_api_token>)
+handler = FlowdockTeamInboxLoggingHandler(<your_flow_api_token>)
 logging.getLogger('your_logger').setLevel(logging.DEBUG).addHandler(handler)
 ```

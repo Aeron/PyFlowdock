@@ -1,5 +1,5 @@
 # coding: utf-8
 
 
-class FlowDockException(Exception):
+class FlowdockException(Exception):
 	pass
