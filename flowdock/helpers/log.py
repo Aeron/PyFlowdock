@@ -1,4 +1,5 @@
 # coding: utf-8
+from traceback import format_exception
 from logging import Handler, DEBUG
 from ..push import TeamInbox
 
@@ -14,5 +15,9 @@ class FlowDockTeamInboxLoggingHandler(Handler):
 
 	def emit(self, record):
 		subject = "sent %s message" % record.levelname.lower()
-		content = record.exc_info or record.msg
+		content = "\n".join(format_exception(*record.exc_info)) if record.exc_info else self.format(record)
 		self.api.post(self.source, self.from_address, subject, content, self.from_name)
+
+	def format(self, record):
+		record.msg = "<p>%s</p>" % record.getMessage()
+		return super(FlowDockTeamInboxLoggingHandler, self).format(record)
