@@ -38,6 +38,8 @@ class TeamInbox(PushAPI):
 	def post(self, source, from_address, subject, content, from_name=None, reply_to=None, project=None, format='html', tags=None, link=None):
 		assert match(ALPHANUMERIC_UNDERSCORES_WHITESPACE, source, IGNORECASE), 'The `source` argument must contain only alphanumeric characters, underscores and whitespace.'
 		assert match(EMAIL, from_address), 'The `from_address` argument must be a valid email address.'
+		if project:
+			assert match(ALPHANUMERIC_UNDERSCORES_WHITESPACE, project, IGNORECASE), 'The `project` argument must contain only alphanumeric characters, underscores and whitespace.'
 		return super(TeamInbox, self).post(locals())
 
 
