@@ -19,7 +19,7 @@ inbox.post('Source', 'from_address@example.com', 'Subject', '<p>Content.</p>')
 ```
 ##### Required params
 
-+ `source` Human readable identifier of the application that uses the Flowdock API. Only alphanumeric characters, underscores and whitespace can be used;
++ `source` Human readable identifier of the application that uses the Flowdock API. Only **alphanumeric** characters, **underscores** and **whitespace** can be used;
 + `from_address` Email address of the message sender. The email address is used to show a avatar (Gravatar) of the sender;
 + `subject` Subject line of the message, will be displayed as the title of Team Inbox message;
 + `content` Content of the message, will be displayed as the body of Team Inbox message.
