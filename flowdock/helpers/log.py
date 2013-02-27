@@ -6,7 +6,8 @@ from ..push import TeamInbox
 
 class FlowdockTeamInboxLoggingHandler(Handler):
 	def __init__(self, flow_api_token, source="PyFlowdock Logging Helper", from_address='no-reply@example.com', from_name='Logger'):
-		super(FlowdockTeamInboxLoggingHandler, self).__init__()
+		# super(FlowdockTeamInboxLoggingHandler, self).__init__()
+		Handler.__init__(self)
 		self.level = DEBUG
 		self.api = TeamInbox(flow_api_token)
 		self.source = source
