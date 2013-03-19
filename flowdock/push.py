@@ -23,13 +23,9 @@ class PushAPI(object):
 	def post(self, data):
 		data = dict((k, v) for k, v in data.iteritems() if k != 'self' and v is not None)
 		response = requests.post(self.api_url, data=data)
-		if response.status_code == 500:
-			raise FlowdockException(response.content)
-		elif response.status_code // 100 == 4:  # all 4xx HTTP errors
-			raise FlowdockException(response.json)
-		elif response.status_code == 200:
-			return True
-		response.raise_for_status()
+		if not response.status_code.ok:
+			response.raise_for_status()
+		return True
 
 
 class TeamInbox(PushAPI):
