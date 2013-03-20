@@ -1,7 +1,7 @@
 # PyFlowdock
 Simple [Flowdock APIs](https://flowdock.com/api) wrapper with some useful helpers. Only [Push API](https://flowdock.com/api/push) (Team Inbox and Chat) and [Streaming API](https://flowdock.com/api/streaming) available at this time.
 ## Installation
-You know how to do it… Right? Just `(sudo) pip install pyflowdock` (not in PyPI at this moment) it or use `(sudo) python setup.py install` inside **pyflowdock** folder.
+You know how to do it… Right? Just `(sudo) pip install pyflowdock` it or use `(sudo) python setup.py install` inside **pyflowdock** folder.
 
 ## How to use it
 Simple as a pie…
