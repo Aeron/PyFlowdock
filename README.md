@@ -54,7 +54,7 @@ chat.post('Content', 'External User Name')
 + `tags` Tags of the message, separated by commas.
 
 ### Streaming API
-Streaming API supports two different content types, JSON stream and (Event-Stream)[http://dev.w3.org/html5/eventsource/].
+Streaming API supports two different content types, JSON stream and [Event-Stream](http://dev.w3.org/html5/eventsource/).
 
 #### JSON stream and Event-Stream
 
