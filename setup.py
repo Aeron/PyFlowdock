@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
 	name="pyflowdock",
-	version="0.3.18",
+	version="0.3.31",
 	packages=[
 		'flowdock',
 		'flowdock.helpers',

@@ -1,5 +1,5 @@
 # PyFlowdock
-Simple [Flowdock APIs](https://flowdock.com/api) wrapper with some useful helpers. Only [Push API](https://flowdock.com/api/push) (Team Inbox and Chat) available at this time.
+Simple [Flowdock APIs](https://flowdock.com/api) wrapper with some useful helpers. Only [Push API](https://flowdock.com/api/push) (Team Inbox and Chat) and [Streaming API](https://flowdock.com/api/streaming) available at this time.
 ## Installation
 You know how to do it… Right? Just `(sudo) pip install pyflowdock` (not in PyPI at this moment) it or use `(sudo) python setup.py install` inside **pyflowdock** folder.
 
@@ -35,6 +35,7 @@ inbox.post('Source', 'from_address@example.com', 'Subject', '<p>Content.</p>')
 
 
 #### Chat
+
 ```python
 from flowdock import Chat
 chat = Chat('your_flow_api_token')
@@ -46,14 +47,41 @@ chat.post('Content', 'External User Name')
 ##### Required params
 
 + `content` Content of the message. Tags will be automatically parsed from the message content. *Maximum length: 8096 characters*;
-+ `external_user_name` Name of the "user" sending the message.
++ `external_user_name` Name of the “user” sending the message.
 
 ##### Optional params
 
 + `tags` Tags of the message, separated by commas.
 
+### Streaming API
+Streaming API supports two different content types, JSON stream and Event-Stream.
+
+#### JSON stream and Event-Stream
+
+```python
+from flowdock import JSONStream, EventStream
+stream = JSONStream('your_personal_api_token')
+# Or
+stream = EventStream('your_personal_api_token')
+# With all params
+gen = stream.fetch(['organization/flow', 'organization/main'])
+# With required params only
+gen = stream.fetch('organization/flow', active='idle')
+for data in gen:
+	# do something with `data`
+	print data
+```
+##### Required params
+
++ `flows` Flow or list of flows to fetch. Only **strings** and **lists** can be used.
+
+##### Optional params
+
++ `active` Show user as active in Flowdock. Defined values `True`, `'idle'` or `None`. If `None`, user will appear offline. *Default: `True`*;
+
 ### Helpers
 #### Logging
+
 ```python
 import logging
 from flowdock.helpers import FlowdockTeamInboxLoggingHandler
@@ -61,6 +89,8 @@ from flowdock.helpers import FlowdockTeamInboxLoggingHandler
 handler = FlowdockTeamInboxLoggingHandler('your_flow_api_token', 'Source', 'from_address@example.com', 'From Name')
 # With required params only
 handler = FlowdockTeamInboxLoggingHandler('your_flow_api_token')
-logger = logging.getLogger('your_logger').setLevel(logging.DEBUG).addHandler(handler)
+logger = logging.getLogger('your_logger')
+logger.setLevel(logging.DEBUG)
+logger.addHandler(handler)
 logger.debug('Content')
 ```
