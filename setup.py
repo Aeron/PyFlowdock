@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
 	name="pyflowdock",
-	version="0.3.33",
+	version="0.3.34",
 	packages=[
 		'flowdock',
 		'flowdock.helpers',
@@ -18,6 +18,7 @@ setup(
 	},
 	author=u"Eugene “Aeron” Glybin",
 	author_email="aeron@aeron.cc",
+	url="https://github.com/Aeron/PyFlowdock",
 	description="Python wrapper for Flowdock APIs",
 	license="LGPLv3",
 	keywords="flowdock api wrapper",
