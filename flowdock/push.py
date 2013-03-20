@@ -1,7 +1,6 @@
 # coding: utf-8
 import requests
 from re import match, IGNORECASE
-from .exceptions import FlowdockException
 
 PUSH_TEAM_INBOX_API_URL = "https://api.flowdock.com/v1/messages/team_inbox/%s"
 PUSH_CHAT_API_URL = "https://api.flowdock.com/v1/messages/chat/%s"

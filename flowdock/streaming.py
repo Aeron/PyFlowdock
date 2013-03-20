@@ -1,37 +1,37 @@
 # coding: utf-8
 import json
 import requests
-from .exceptions import FlowdockException
-
 
 STREAMING_API_URL = 'https://stream.flowdock.com/flows'
+DEFAULT_CONTENT_TYPE = 'application/json'
 
 
 class StreamingAPI(object):
 	API_URL = STREAMING_API_URL
-	ALLOWED_CONTENT_TYPE = ('application/json', 'text/event-stream')
 	ALLOWED_STATUSES = (True, 'idle', None)
+	STREAM_CHUNK_SIZE = 128
 
-	def __init__(self, personal_api_token, flows, active=True, accept='application/json'):
-		assert isinstance(flows, (list, basestring)), 'The `flows` argument must be string or list instance.'
-		assert active in self.ALLOWED_STATUSES, 'The `active` argument must be in %s.' % str(self.ALLOWED_STATUSES)
-		assert accept in self.ALLOWED_CONTENT_TYPE, 'The `accept` argument must be in %s.' % str(self.ALLOWED_CONTENT_TYPE)
+	def __init__(self, personal_api_token, accept=DEFAULT_CONTENT_TYPE):
 		self.personal_api_token = personal_api_token
-		self.flows = flows
-		self.active = active
-		self.accept = accept
-		self.params = {
-			'filter': ','.join(self.flows) if isinstance(self.flows, list) else self.flows
-		}
+		self.flows = None
+		self.active = None
 		self.headers = {
-			'content-type': self.ALLOWED_CONTENT_TYPE[0],
-			'accept': self.accept,
+			'content-type': DEFAULT_CONTENT_TYPE,
+			'accept': accept,
 		}
 		self.auth = (self.personal_api_token, '')
 		self.connection = None
 
 	def __repr__(self):
 		return "%s(%s, %s, %s, %s) instance at %s" % (self.__class__.__name__, self.personal_api_token, self.flows, self.active, self.accept, hex(id(self)))
+
+	@property
+	def params(self):
+		params = {
+			'filter': ','.join(self.flows) if isinstance(self.flows, list) else self.flows,
+			'active': self.active,
+		}
+		return params
 
 	@property
 	def stream(self):
@@ -41,9 +41,19 @@ class StreamingAPI(object):
 				self.connection.raise_for_status()
 		return self.connection
 
-	def fetch(self, plain=False):
-		for line in self.stream.iter_lines(128):
+	def fetch(self, flows, active=None, plain=False):
+		assert isinstance(flows, (list, basestring)), 'The `flows` argument must be string or list instance.'
+		assert active in self.ALLOWED_STATUSES, 'The `active` argument must be in %s.' % str(self.ALLOWED_STATUSES)
+		for line in self.stream.iter_lines(self.STREAM_CHUNK_SIZE):
 			if line and line != ':':
-				if not plain and self.accept == self.ALLOWED_CONTENT_TYPE[0]:
+				if not plain and self.accept == DEFAULT_CONTENT_TYPE:
 					yield json.loads(line)
 				yield line
+
+
+def JSONStream(personal_api_token):
+	return StreamingAPI(personal_api_token)
+
+
+def EventStream(personal_api_token):
+	return StreamingAPI(personal_api_token, accept='text/event-stream')
