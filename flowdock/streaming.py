@@ -13,11 +13,12 @@ class StreamingAPI(object):
 
 	def __init__(self, personal_api_token, accept=DEFAULT_CONTENT_TYPE):
 		self.personal_api_token = personal_api_token
+		self.accept = accept
 		self.flows = None
 		self.active = None
 		self.headers = {
 			'content-type': DEFAULT_CONTENT_TYPE,
-			'accept': accept,
+			'accept': self.accept,
 		}
 		self.auth = (self.personal_api_token, '')
 		self.connection = None
@@ -44,6 +45,8 @@ class StreamingAPI(object):
 	def fetch(self, flows, active=None, plain=False):
 		assert isinstance(flows, (list, basestring)), 'The `flows` argument must be string or list instance.'
 		assert active in self.ALLOWED_STATUSES, 'The `active` argument must be in %s.' % str(self.ALLOWED_STATUSES)
+		self.flows = flows
+		self.active = active
 		for line in self.stream.iter_lines(self.STREAM_CHUNK_SIZE):
 			if line and line != ':':
 				if not plain and self.accept == DEFAULT_CONTENT_TYPE:

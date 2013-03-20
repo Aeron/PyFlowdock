@@ -64,9 +64,9 @@ stream = JSONStream('your_personal_api_token')
 # Or
 stream = EventStream('your_personal_api_token')
 # With all params
-gen = stream.fetch(['organization/flow', 'organization/main'])
-# With required params only
 gen = stream.fetch('organization/flow', active='idle')
+# With required params only
+gen = stream.fetch(['organization/flow', 'organization/main'])
 for data in gen:
 	# do something with `data`
 	print data
