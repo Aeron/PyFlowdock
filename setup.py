@@ -19,7 +19,7 @@ setup(
 	author=u"Eugene “Aeron” Glybin",
 	author_email="aeron@aeron.cc",
 	url="https://github.com/Aeron/PyFlowdock",
-	description="Python wrapper for Flowdock APIs",
+	description="Simple Flowdock APIs wrapper with some useful helpers. Only Push API (Team Inbox and Chat) and Streaming API available at this moment.",
 	license="LGPLv3",
 	keywords="flowdock api wrapper",
 	classifiers=[
