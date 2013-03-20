@@ -22,7 +22,7 @@ class PushAPI(object):
 	def post(self, data):
 		data = dict((k, v) for k, v in data.iteritems() if k != 'self' and v is not None)
 		response = requests.post(self.api_url, data=data)
-		if not response.status_code.ok:
+		if not response.ok:
 			response.raise_for_status()
 		return True
 
